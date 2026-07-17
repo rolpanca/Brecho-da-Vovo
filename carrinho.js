@@ -24,18 +24,52 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
 
             item.classList.add('item-carrinho');
 
+
             item.innerHTML = `
                 <img src="${produto.imagem}" alt="${produto.nome}">
 
                 <div class="info-carrinho">
+
                     <h3>${produto.nome}</h3>
-                    <p>Quantidade: ${produto.quantidade}</p>
+
+                    <div class="controle-quantidade">
+                        <button class="btn-menos">-</button>
+
+                        <span>${produto.quantidade}</span>
+
+                        <button class="btn-mais">+</button>
+                    </div>
+                    
+                     
                     <p class="preco">
                         R$ ${produto.preco.toFixed(2).replace('.', ',')}
                     </p>  
-                </div>      
-
+                </div>     
             `;
+            const botaoMais = item.querySelector('.btn-mais');
+            const botaoMenos = item.querySelector('.btn-menos');
+
+            botaoMais.addEventListener('click', function() {
+                produto.quantidade++;
+
+                localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+                atualizarCarrinho();
+            });
+            
+            botaoMenos.addEventListener('click', function() {
+
+                if (produto.quantidade > 1) {
+                    produto.quantidade--;
+                }else {
+                    const indice = carrinho.indexOf(produto);
+                    carrinho.splice(indice, 1);
+                }
+
+                localStorage.setItem('carrinho', JSON.stringify(carrinho) );
+
+                atualizarCarrinho();
+            });
 
             const botaoRemover = document.createElement('button');
             botaoRemover.textContent = 'Remover';
