@@ -1,4 +1,4 @@
-console.log(ScriptProcessorNode.js, carregado);
+console.log('carrinho.js carregado');
 console.log(produtos);
 console.log(produtos.length);
 
@@ -18,7 +18,7 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
     if (carrinho.length === 0) {
         alert('Seu carrinho está vazio!');
 
-        window.location.href = 'carrinho.html';
+        window.location.href = 'index.html';
     }
 
     function atualizarCarrinho() {

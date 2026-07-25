@@ -16,6 +16,10 @@ const pesquisa = document.getElementById('pesquisa');
 const produtos = document.querySelectorAll('.produto');
 
 
+
+
+
+
 const slides = document.querySelectorAll('.slide');
 const contador = document.getElementById('contador-carrinho');
 
@@ -34,7 +38,7 @@ let index = 0;
 
 pesquisa.addEventListener('keyup', function(){
 
-    const textoPesquisa = pesquisa.value.toLowerCase();   
+    const termoPesquisa = pesquisa.value.toLowerCase();   
 
     produtos.forEach(function(produto){
 
@@ -60,27 +64,40 @@ pesquisa.addEventListener('keyup', function(){
 //BOTÕES COMPRAR
 //==============================================================================================
 
-botoesComprar.forEach(function(botao){
+botoesComprar.forEach(function(botaoComprar){
 
-    botao.addEventListener('click', function(event) {
+    botaoComprar.addEventListener('click', function(event) {
 
-        event.preventDefault();        
+       
+        event.preventDefault();     
+        
+        console.log("1")
 
-        const produto = botao.closest('.produto');       
+        const produto = botaoComprar.closest('.produto');    
+        
+        console.log("2")
 
         const nome = produto.querySelector('h2').textContent;
+
+        console.log("3")
+
         const preco = produto.querySelector('.preco').textContent;
+
+        console.log("4")
+
         const imagem = produto.querySelector('img').src;
 
+        console.log("5")
 
         const valor = Number(preco.replace('R$', '').replace(',', '.'));
+
+        console.log("6")
 
         const produtoExistente = carrinho.find(function(item) {
             return item.nome === nome;
         });
 
-       
-
+              
         if (produtoExistente) {
             produtoExistente.quantidade++;
         } else {
@@ -92,7 +109,9 @@ botoesComprar.forEach(function(botao){
             });
         };
         atualizarCarrinho(); 
-        salvarCarrinho();    
+        console.log("7")
+        salvarCarrinho();  
+        console.log("8")  
                               
     });
     
@@ -160,9 +179,9 @@ function atualizarCarrinho() {
 
             total += produto.preco * produto.quantidade;
 
-            const item = document.createElement('li');
+            const itemCarrinho = document.createElement('li');
 
-        item.innerHTML = `
+        itemCarrinho.innerHTML = `
             ${produto.nome} - R$ ${produto.preco.toFixed(2).replace('.', ',')}
 
             <button class="btn-menos">-</button>
@@ -171,8 +190,8 @@ function atualizarCarrinho() {
 
             <button class="btn-mais">+</button>        
         `;
-        const botaoMais = item.querySelector('.btn-mais');
-        const botaoMenos = item.querySelector('.btn-menos');
+        const botaoMais = itemCarrinho.querySelector('.btn-mais');
+        const botaoMenos = itemCarrinho.querySelector('.btn-menos');
 
         botaoMais.addEventListener('click', function() {
 
@@ -199,8 +218,8 @@ function atualizarCarrinho() {
         botaoRemover.textContent = 'Remover';
         botaoRemover.classList.add('btn-remover');
 
-
-        item.appendChild(botaoRemover);
+        
+        itemCarrinho.appendChild(botaoRemover);
 
         botaoRemover.addEventListener('click', function(){
             const indice = carrinho.indexOf(produto);            
@@ -214,7 +233,7 @@ function atualizarCarrinho() {
             totalCarrinho.textContent = 'Total: R$ ' + total.toFixed(2).replace('.', ',');
         });
     
-        listaCarrinho.appendChild(item);
+        listaCarrinho.appendChild(itemCarrinho);
         });
         totalCarrinho.textContent = 'Total: R$ ' + total.toFixed(2).replace('.', ',');
 
