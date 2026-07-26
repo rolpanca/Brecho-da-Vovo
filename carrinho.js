@@ -1,6 +1,5 @@
 console.log('carrinho.js carregado');
-console.log(produtos);
-console.log(produtos.length);
+
 
 const listaCarrinho = document.getElementById('lista-carrinho-pagina');
 const totalCarrinho = document.getElementById('total-carrinho-pagina');
@@ -42,6 +41,10 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
 
                     <h3>${produto.nome}</h3>
 
+                    <p class="preco-unitario">
+                        Preço: R$ ${produto.preco.toFixed(2).replace('.', ',')};
+                    </p>
+
                     <div class="controle-quantidade">
                         <button class="btn-menos">-</button>
 
@@ -49,13 +52,15 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
 
                         <button class="btn-mais">+</button>
                     </div>
-                    
+
+                    <p class="subtotal">
+                        Subtotal: R$ ${(produto.preco * produto.quantidade).toFixed(2).replace('.', ',')};
+                    </p>
                      
-                    <p class="preco">
-                        R$ ${produto.preco.toFixed(2).replace('.', ',')}
-                    </p>  
+                  
                 </div>     
             `;
+
             const botaoMais = item.querySelector('.btn-mais');
             const botaoMenos = item.querySelector('.btn-menos');
 

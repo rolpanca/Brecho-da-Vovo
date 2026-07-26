@@ -108,11 +108,24 @@ botoesComprar.forEach(function(botaoComprar){
                 imagem: imagem
             });
         };
-        atualizarCarrinho(); 
-        console.log("7")
-        salvarCarrinho();  
-        console.log("8")  
-                              
+
+        console.log("6")
+
+        try {
+            atualizarCarrinho();   
+            console.log("7")      
+            salvarCarrinho();  
+            }catch (erro) {
+                console.erro("ERRO EM atualizarCarrinho:",erro);
+            }
+        try {
+            salvarCarrinho();
+            console.log("8") 
+        } catch (erro)  {
+            console.logo("ERRO EM salvarCarrinho:",erro);
+        } 
+             
+                               
     });
     
 });
@@ -172,12 +185,17 @@ setInterval(trocarBanner, 3000);
 //=======================================================================================
 
 function atualizarCarrinho() {
+
+      console.log("Entrou em atualizarCarrinho"); 
+
         total = 0;
         listaCarrinho.innerHTML = '';   
 
         carrinho.forEach(function(produto){
 
             total += produto.preco * produto.quantidade;
+
+            console.log("Criando item");
 
             const itemCarrinho = document.createElement('li');
 
