@@ -42,7 +42,7 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
                     <h3>${produto.nome}</h3>
 
                     <p class="preco-unitario">
-                        Preço: R$ ${produto.preco.toFixed(2).replace('.', ',')};
+                        Preço: R$ ${produto.preco.toFixed(2).replace('.', ',')}
                     </p>
 
                     <div class="controle-quantidade">
@@ -54,7 +54,7 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
                     </div>
 
                     <p class="subtotal">
-                        Subtotal: R$ ${(produto.preco * produto.quantidade).toFixed(2).replace('.', ',')};
+                        Subtotal: R$ ${(produto.preco * produto.quantidade).toFixed(2).replace('.', ',')}
                     </p>
                      
                   
