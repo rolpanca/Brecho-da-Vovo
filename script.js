@@ -189,6 +189,7 @@ function atualizarCarrinho() {
       console.log("Entrou em atualizarCarrinho"); 
 
         total = 0;
+
         listaCarrinho.innerHTML = '';   
 
         carrinho.forEach(function(produto){
@@ -208,6 +209,7 @@ function atualizarCarrinho() {
 
             <button class="btn-mais">+</button>        
         `;
+
         const botaoMais = itemCarrinho.querySelector('.btn-mais');
         const botaoMenos = itemCarrinho.querySelector('.btn-menos');
 
@@ -248,7 +250,7 @@ function atualizarCarrinho() {
 
             salvarCarrinho();
             
-            totalCarrinho.textContent = 'Total: R$ ' + total.toFixed(2).replace('.', ',');
+            totalCarrinho.textContent = ' R$ ' + total.toFixed(2).replace('.', ',');
         });
     
         listaCarrinho.appendChild(itemCarrinho);

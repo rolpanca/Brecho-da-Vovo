@@ -14,20 +14,50 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
         carrinho = JSON.parse(carrinhoSalvo);
     };
 
-    if (carrinho.length === 0) {
-        alert('Seu carrinho está vazio!');
-
-        window.location.href = 'index.html';
-    }
+   
 
     function atualizarCarrinho() {
         total = 0;
 
+        let quantidadeTotal = 0;
+
         listaCarrinho.innerHTML = '';
+
+
+          if (carrinho.length === 0) {
+
+            listaCarrinho.innerHTML = `
+                <div class="carrinho-vazio">
+                    <h2>🛒 Seu carrinho está vazio</h2>
+                    <p>Adicione alguns produtos para continuar.</p>
+
+                    <a  href="index.html" class="btn-voltar">
+                        Continuar Comprando
+
+                    </a>
+
+                </div>
+            `;
+
+            totalCarrinho.textContent = 'R$ 0,00';
+
+            const subtotal = document.getElementById('subtotal-carrinho');
+
+            if(subtotal) {
+                subtotal.textContent = 'R$ 0,00';
+            }
+            return
+        };
+
+
+
+
+
 
         carrinho.forEach(function(produto) {
 
             total += produto.preco * produto.quantidade;
+            quantidadeTotal += produto.quantidade;
 
             const item = document.createElement('div');
 
@@ -35,7 +65,7 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
 
 
             item.innerHTML = `
-                <img src="${produto.imagem}" alt="${produto.nome}">
+                <img src="${produto.imagem}" alt="${produto.nome}" class="img-carrinho">
 
                 <div class="info-carrinho">
 
@@ -60,6 +90,9 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
                   
                 </div>     
             `;
+
+          
+
 
             const botaoMais = item.querySelector('.btn-mais');
             const botaoMenos = item.querySelector('.btn-menos');
@@ -90,7 +123,12 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
             botaoRemover.textContent = 'Remover';
             botaoRemover.classList.add('btn-remover');
 
-            item.appendChild(botaoRemover);
+
+            const areaBotoes = document.createElement('div');
+            areaBotoes.classList.add('acoes-carrinho');
+            areaBotoes.appendChild(botaoRemover);
+            item.appendChild(areaBotoes);
+
 
             botaoRemover.addEventListener('click', function(){
                 const indice = carrinho.indexOf(produto);
@@ -106,7 +144,17 @@ const carrinhoSalvo = localStorage.getItem('carrinho');
             listaCarrinho.appendChild(item);
         });
 
-        totalCarrinho.textContent = 'Total: R$ ' + total.toFixed(2).replace('.', ',');
+       
+
+
+
+        const subtotalCarrinho = document.getElementById('subtotal-carrinho');
+        subtotalCarrinho.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+
+        const quantidadeItens = document.getElementById('quantidade-itens');
+        quantidadeItens.textContent = quantidadeTotal;
+
+        totalCarrinho.textContent = ' R$ ' + total.toFixed(2).replace('.', ',');
 
     };
     atualizarCarrinho();
