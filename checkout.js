@@ -1,6 +1,7 @@
 const listaCheckout = document.getElementById('lista-checkout');
 const totalCheckout = document.getElementById('total-checkout');
 const btnFinalizar = document.getElementById('btn-finalizar');
+const formulario = document.getElementById('form-checkout');
 
 const pagamento = document.querySelectorAll('input[name="pagamento"]');
 
