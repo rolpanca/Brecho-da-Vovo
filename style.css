@@ -12,18 +12,31 @@ body {
     line-height: 1.5;
 }
 
+/*===============================================================
+   HEADER
+===================================================================*/   
+
 header {
     background-color: black;
     color: white;
     text-align: center;
     padding: 30px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 header p {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 18px;
+    opacity: -9;
 }
 header h1 {
-    font-size: 45px;
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.logo {
+    text-align: center;
 }
 
 nav {
@@ -78,7 +91,9 @@ nav {
 .pesquisar button:hover {
     background: darkgreen;
 }
-
+/*===============================================================
+   PRODUTOS
+===================================================================*/   
 .produtos {    
     display: flex;
     justify-content: center;
@@ -91,6 +106,11 @@ nav {
 .produto {
     background: white;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     width: 320px;
     border: 1px solid #ddd;
     padding: 20px;
@@ -98,6 +118,13 @@ nav {
     text-align: center;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
     transition: 0.3s;
+
+    gap: 10px;
+
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .produto img {
     width: 100%;
@@ -111,8 +138,10 @@ nav {
 .produto h2 {
     font-weight: bold;
     letter-spacing: 1px;
-
     margin: 15px 0;
+}
+.produto p {
+    flex-grow: 1;
 }
 
 
@@ -121,10 +150,10 @@ nav {
     position: absolute;
     top: 15px;
     left: 15px;
-    background: red;
+    background: #d62828;
     color: white;
-    padding: 8px 12px;
-    font-size: 12px;
+    padding: 6px 12px;
+    font-size: 13px;
     font-weight: bold;
     border-radius: 20px;
     box-shadow: 0 0 8px rgba(0,0,0,0.2);
@@ -132,8 +161,8 @@ nav {
 
 .avaliacao {
     color: #f5b301;
-    font-size: 22px;
-    margin-bottom: 15px;
+    font-size: 22px;   
+    letter-spacing: 2px;
 }
 
 .newsletter {
@@ -182,7 +211,7 @@ nav {
     font-size: 28px;
     font-weight: bold;
     color: #0a8f08;
-    margin: 15px 0 ;   
+    margin: 10px 0 ;   
 }
 
 .btn-comprar {
@@ -193,41 +222,51 @@ nav {
     background: #0a8f08;
     color: white;
     border: none;
-    padding: 14px;
+    box-sizing: border-box;
+    padding: 12px;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 10px;
     cursor: pointer;
-    border-radius: 10px;
-    font-size: 18px;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: bold;
     transition: all .3s;
 }
 .btn-comprar:hover {
     background: #087307;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.20);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.20);
 }
 .btn-detalhes {
     display: block;
     background: white;
     color: #0a8f08;
     border: 2px solid #0a8f08;
-    padding: 14px;
+    padding: 12px;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 10px;
     cursor: pointer;
-    border-radius: 10px;
-    font-size: 18px;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: bold;
     transition: all .3s;
 }
 .btn-detalhes:hover {
     background: #0a8f08;
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.20);
 }
 
+.acoes-produto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+/*===============================================================
+   CARRINHO
+===================================================================*/   
 .carrinho {
     padding: 25px;
     margin: 20px auto;
@@ -270,12 +309,18 @@ nav {
     font-weight: bold;
     color: green;
 }
-
+/*===============================================================
+   BANNER
+===================================================================*/   
 .banner {
     width: 100%;
     height: 400px;
     overflow: hidden;
     position: relative;  
+
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    margin: 30px auto;
 }
 
 .slides {     
@@ -293,8 +338,10 @@ nav {
    object-fit: cover;
 
    opacity: 0;
-   transition: opacity 1s ease;
+   transition: opacity 1.2s ease-in-out;
+   transform: scale(1);
 }
+
 .slide.ativo {
     opacity: 1;
 }
@@ -341,6 +388,9 @@ nav {
     margin-bottom: 20px;
 }
 
+/*===============================================================
+   MODAL
+===================================================================*/   
 
 .modal {
     display: none;
@@ -731,9 +781,9 @@ footer p {
     align-items: center;
 
     margin-top: 20px;
-    padding-top: 20px;
-    
+    padding-top: 20px;    
     border-top: 2px solid #ddd;
+
     font-size: 30px;
     font-weight: bold;
     color: #0a8f08;
@@ -767,6 +817,10 @@ footer p {
     background: #087307;
     transform: translateY(-3px);
 }
+
+/*===============================================================
+   CHECKOUT
+===================================================================*/   
 
 .checkout {
     max-width: 1000px;
@@ -831,7 +885,9 @@ footer p {
     display: inline-block;
     letter-spacing: 1px;
 }
-
+/*===============================================================
+   CONFIRMAÇÃO
+===================================================================*/   
 .confirmacao {
     display: flex;
     justify-content: center;
@@ -1281,7 +1337,7 @@ CHECKOUT
 }
 
 
-
+/*=======================================*/
 
 
 
@@ -1319,6 +1375,9 @@ CHECKOUT
     .produtos {
         flex-direction: column;
         align-items: center;
+
+        justify-content: center;
+        gap: 20px;
     }
 
     .produto {
@@ -1332,14 +1391,21 @@ CHECKOUT
         width: 100%;
         height: 200px;
         object-fit: contain;
+
+        transition: .4s;
+    }
+    .produto:hover img {
+        transform: scale(1.08);
     }
 
     .filtro-box {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-direction: column;       
+        gap: 15px;
     }
-    .filtro-box select {
-        width: 90%;
+    .filtro-box select,
+    .filtro-box button {
+        width: 100%;
     }
 
     .btn-filtrar {
@@ -1347,17 +1413,24 @@ CHECKOUT
     }
 
     .pagamento-box {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
     }
 
-    .pagamento-item {
+    .pagamento-item,
+    .entrega-item,
+    .depoimento-item {
         width: 90%;
+        max-width: 400px;
     }
 
    .entrega-box {
-    flex-direction: column;
-    align-items: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;        
    }
 
    .entrega-item {
@@ -1365,8 +1438,9 @@ CHECKOUT
    }
 
    .depoimentos-box {
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
    }
    .depoimento-item {
     width: 90%;
@@ -1383,15 +1457,42 @@ CHECKOUT
 
   .pesquisar {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 10px;
+    margin-top: 20px;
     width: 100%;
     align-items: center;
   }
 
-  .pesquisar input,
+  .pesquisar input {
+    width: 320px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    transition: .3s;
+  }
+  .pesquisar input:focus {
+    border-color: #0a8f08;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+
+  }
+
   .pesquisar button {
-    width: 100%;
+    padding: 12px 20px;
+    background: #0a8f08;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s;
+  }
+  .pesquisar button:hover {
+    background: #087307;
+    transform: translateY(-2px);
   }
 
   .banner {
@@ -1463,8 +1564,8 @@ CHECKOUT
 .voltar-topo {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    background: green;
+    right: 30px;
+    background: #0a8f08;
     color: white;
     width: 55px;
     height: 55px;
@@ -1474,15 +1575,15 @@ CHECKOUT
     justify-content: center;
     align-items: center;
     font-size: 22px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.30);
     transition: 0.3s;
     z-index: 1000;
 
     animation: pulsar 2s infinite;
 }
 .voltar-topo:hover {
-    background: darkgreen;
-    transform: scale(1.1);
+    background: #087307;
+    transform: translateY(-5px) scale(1.08);
 }
 .btn-voltar-loja {
     text-decoration: none;
@@ -1506,15 +1607,31 @@ CHECKOUT
     background: #a60000;
     transform: scale(1.1);
 }
-
+/*===============================================================
+   FOOTER
+===================================================================*/   
 footer {
+    background: #111;
+    color: white;    
     text-align: center;
+    padding: 20px 30px;
+    margin-top: 50px;
 }
 
 .redes-sociais {
+    display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
+    margin-top: 20px;      
     gap: 20px;
+}
+.redes-sociais a {
+    color: white;
+    font-size: 28px;
+    transition: .3s;
+}
+.redes-sociais a:hover {
+    color: #0a8f08;
+    transform: translateY(-4px);
 }
 
 
