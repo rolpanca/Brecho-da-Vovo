@@ -1355,6 +1355,75 @@ CHECKOUT
 
 }
 
+.login {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+.login-box {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.login-box h2 {
+    text-align: center;
+    font-size: 30px;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;   
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.btn-entrar {
+    width: 100%;
+    padding: 14px;
+    background: #198754;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-entrar:hover {
+    background: #146c43;
+}
+
+.cadastro-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #555;
+}
+.cadastro-link a {
+    color: #198754;
+    text-decoration: none;
+    font-weight: bold;
+}
+.cadastro-link a:hover {
+    text-decoration: underline;
+}
 
 /*=======================================*/
 
@@ -1651,6 +1720,16 @@ footer {
 .redes-sociais a:hover {
     color: #0a8f08;
     transform: translateY(-4px);
+}
+
+.login {
+    padding: 30px 15px;    
+}
+.login-box {
+    padding: 30px 15px;
+}
+.login-box h2 {
+    font-size: 26px;
 }
 
 
