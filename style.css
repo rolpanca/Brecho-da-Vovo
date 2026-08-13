@@ -1732,6 +1732,13 @@ footer {
     font-size: 26px;
 }
 
+#mensagem-login {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #dc3545;
+    font-size: 14px;
+}
+
 
 
 
