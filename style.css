@@ -1738,6 +1738,9 @@ footer {
     color: #dc3545;
     font-size: 14px;
 }
+#mensagem-login.sucesso {
+    color: #198754;
+}
 
 
 

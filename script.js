@@ -291,21 +291,24 @@ function atualizarContadorCarrinho() {
 carregarCarrinho();
 
 
-//============================================================================================
-//INICIALIZAÇÃO
-//============================================================================================
+const usuarioArea = document.getElementById('usuario-area');
 
-// const carrinhoSalvo = localStorage.getItem('carrinho');
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
-// if (carrinhoSalvo) {
-//     carrinho = JSON.parse(carrinhoSalvo);
-//     atualizarCarrinho();
-// }
+if (usuarioLogado) {
+    usuarioArea.innerHTML = `
+    <span>Olá, ${usuarioLogado.nome}!</span>
+    <button id="btn-sair">Sair</button>
 
-// window.addEventListener('focus', function () {
-//     carregarCarrinho();
-// });
+    `;
 
+    const btnSair = document.getElementById('btn-sair');
+
+    btnSair.addEventListener('click', function(){
+        localStorage.removeItem('usuarioLogado');
+        window.location.reload();
+    });
+}
    
 
 

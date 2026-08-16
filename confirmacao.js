@@ -8,5 +8,5 @@ if (numeroPedido) {
 
 }else {
     
-    campNumero.textContent 'Não encontrado';
+    campNumero.textContent = 'Não encontrado';
 }
