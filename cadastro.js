@@ -46,7 +46,16 @@ formulario.addEventListener('submit', function(event){
         email: valorEmail,
         senha: valorSenha
     };
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    const usuariosSalvos = localStorage.getItem('usuarios');
+
+    let usuarios = [];
+
+    if (usuariosSalvos) {
+        usuarios = JSON.parse(usuariosSalvos);
+    }
+    usuarios.push(usuario);
+
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
 
 mensagemCadastro.textContent = 'Conta criada com sucesso!';

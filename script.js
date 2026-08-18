@@ -260,13 +260,28 @@ function atualizarCarrinho() {
         atualizarContadorCarrinho();
 };
 
+function obterChaveCarrinho() {
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+
+    if (!usuarioLogado) {
+        return 'carrinho';
+    }
+    return 'carrinho_' + usuarioLogado.email;
+}
+
 
 function salvarCarrinho() {
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    const ChaveCarrinho = obterChaveCarrinho();
+
+    localStorage.setItem(ChaveCarrinho, JSON.stringify(carrinho));
 };
 
+
 function carregarCarrinho() {
-    const carrinhoSalvo = localStorage.getItem('carrinho');
+    const ChaveCarrinho = obterChaveCarrinho();
+
+    const carrinhoSalvo = localStorage.getItem(ChaveCarrinho);
+
         if (carrinhoSalvo) {
             carrinho = JSON.parse(carrinhoSalvo);
         } else {
@@ -311,6 +326,20 @@ if (usuarioLogado) {
 }
    
 
+function verificarLogin() {
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
+    if (!usuarioLogado) {
+        return false;
+    }
+
+    return true;
+};
+
+if (verificarLogin()) {
+    console.log('Usuário esta logado.');
+}else {
+    console.log('Nenhum usuário esta logado.')
+}
 
 

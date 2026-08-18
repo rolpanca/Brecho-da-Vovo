@@ -1,3 +1,9 @@
+const usuarioLogado = localStorage.getItem('usuarioLogado');
+
+if (usuarioLogado) {
+    window.location.href = 'index.html';
+};
+
 const formulario = document.querySelector('form');
 const email = document.getElementById('email');
 const senha = document.getElementById('senha');
