@@ -4,6 +4,18 @@ const modalDetalhes = document.getElementById('modal-detalhes')
 const conteudoDetalhes = document.getElementById('conteudo-detalhes');
 const fecharModal = document.getElementById('fechar-modal');
 
+fecharModal.addEventListener('click',function() {
+    modalDetalhes.style.display = 'none';
+});
+
+modalDetalhes.addEventListener('click',function(evento){
+    if (evento.target === modalDetalhes){
+        modalDetalhes.style.display = 'none';
+    }
+})
+
+
+
 const usuarioLogado = JSON.parse(
     localStorage.getItem('usuarioLogado')
 );
