@@ -13,10 +13,259 @@ const botoesComprar = document.querySelectorAll('.btn-comprar');
 
 
 const pesquisa = document.getElementById('pesquisa');
+
 const produtos = document.querySelectorAll('.produto');
+const filtroCategoria = document.getElementById('filtro-categoria');
+const filtroTamanho = document.getElementById('filtro-tamanho');
+const filtroPreco = document.getElementById('filtro-preco');
+const botaoFiltrar = document.querySelector('.btn-filtrar');
+const mensagemProdutos = document.getElementById('mensagem-produtos');
+
+botaoFiltrar.addEventListener('click', function() {
+    
+    const categoriaEscolhida = filtroCategoria.value;
+    const tamanhoEscolhido = filtroTamanho.value;
+    const tamanhoEscolhidoTexto = tamanhoEscolhido.toLowerCase();  
+    const precoEscolhido = filtroPreco.value;
+
+    let filtroPrecoAtivo;
+
+    if (precoEscolhido === ''){
+        filtroPrecoAtivo = false;
+    } else {
+        filtroPrecoAtivo = true;
+    }
+
+    console.log('Filtro de preço ativo:', filtroPrecoAtivo);
+
+     
+    console.log('Categori:', categoriaEscolhida);
+    console.log('Tamanho:', tamanhoEscolhido);
+    console.log('Tamanho escolhido em texto:', tamanhoEscolhidoTexto);
+    console.log('Preço:', precoEscolhido);
+
+
+    let quantidadeEncontrada = 0;
+
+    produtos.forEach(function(produto) {
+        console.log('Analizando produto:', produto.querySelector('h2').textContent);
+
+        const categoriaProduto = produto.dataset.categoria;
+
+        console.log('Categoria do produto:', categoriaProduto);
+
+        const categoriaEncontrada = categoriaEscolhida === '' || categoriaProduto === categoriaEscolhida; 
+
+        console.log('Categoria encontrada:', categoriaEncontrada);
+        
+
+        const informacaoTamanho = produto.querySelector('p:last-of-type').textContent;
+
+        console.log('Informação do tamanho:', informacaoTamanho);
+
+        const textoTamanho = informacaoTamanho.toLowerCase();
+
+        console.log('Texto do tamanho:', textoTamanho);
+
+        const tamanhoEncontrado = tamanhoEscolhidoTexto === '' || textoTamanho.includes(tamanhoEscolhidoTexto);
+
+        console.log('Tamanho encontrado:', tamanhoEncontrado);
+
+        const precoProduto = produto.querySelector('.preco').textContent;
+
+        const valorProduto = Number(precoProduto.replace('R$', '').replace(',', '.'));
+
+        const precoEncontrado = precoEscolhido === ''
+        ? true
+        : precoEscolhido === '100+'
+            ? valorProduto > 100
+            : valorProduto <= Number(precoEscolhido);
+
+
+        console.log(('preço escolhido:', precoEscolhido))
+
+        console.log('Preco encontrado:', precoEncontrado);
+
+        console.log('Valor do produto:', valorProduto);
+
+        console.log('Preco do produto:', precoProduto);
+
+        
+
+        let produtoEncontrado;
+
+        if (filtroPrecoAtivo) {
+            produtoEncontrado = categoriaEncontrada && tamanhoEncontrado && precoEncontrado;
+        } else {
+            produtoEncontrado = categoriaEncontrada && tamanhoEncontrado;
+        }
+
+        console.log('Produto encontrado:', produtoEncontrado);
+
+        if (!produtoEncontrado) {
+            produto.style.display = 'none';
+        } else {
+            produto.style.display = '';
+
+            quantidadeEncontrada++;
+        }
+       
+    });
+
+    if (quantidadeEncontrada === 0) {
+        mensagemProdutos.style.display = 'block';
+    } else {
+        mensagemProdutos.style.display - 'none';
+    }
+
+});
 
 
 
+function filtrarPorCategoria(categoria) {
+    produtos.forEach(function(produto) {
+        const categoriaProduto = produto.dataset.categoria;
+
+        console.log('Produto:', produto);
+        console.log('Categoria do produto:', categoriaProduto);
+        console.log('Categoria escolhida:', categoria);
+
+        if (categoriaProduto === categoria) {
+            produto.style.display = '';
+        } else {
+            produto.style.display = 'none';
+        }
+    });
+};
+
+
+function mostrarTodosProdutos() {
+
+    produtos.forEach(function(produto) {
+        produto.style.display = '';
+    });
+}
+
+const categorias = document.querySelectorAll('.categoria');
+
+categorias.forEach(function(categoria) {
+
+    categoria.addEventListener('click', function() {
+        
+        const nomeCategoria = categoria.dataset.categoria;
+
+        console.log('Categoria clicada:', nomeCategoria);
+
+        filtrarPorCategoria(nomeCategoria);
+
+        const secaoProdutos = document.getElementById('produtos');
+
+        secaoProdutos.scrollIntoView({
+            behavior: 'smooth'
+        });
+      
+    });
+
+});
+
+
+
+
+
+const menuMasculino = document.getElementById('menu-masculino');
+
+console.log(menuMasculino);
+
+menuMasculino.addEventListener('click', function(event) {
+
+ console.log('Clique no Masculino');
+
+    event.preventDefault();
+    filtrarPorCategoria('Masculino');
+});
+
+const menuFeminino = document.getElementById('menu-feminino');
+
+console.log(menuFeminino);
+
+menuFeminino.addEventListener('click', function(event) {
+    console.log('Clique no Feminino');
+
+    event.preventDefault();
+
+    filtrarPorCategoria('Feminino');
+});
+
+const menuInicio = document.getElementById('menu-inicio');
+
+console.log(menuInicio);
+
+menuInicio.addEventListener('click', function(event) {
+
+    console.log('Clique no inicio');
+
+    event.preventDefault();
+
+    mostrarTodosProdutos();
+    
+});
+
+
+const menuInfantil = document.getElementById('menu-infantil');
+
+console.log(menuInfantil);
+
+menuInfantil.addEventListener('click', function(event) {
+
+    console.log('Clique no Infantil');
+
+    event.preventDefault();
+
+    filtrarPorCategoria('Infantil');
+});
+
+
+const menuPromocoes = document.getElementById('menu-promocoes');
+
+console.log(menuPromocoes);
+
+menuPromocoes.addEventListener('click', function(event) {
+
+    console.log('Clique em Promoçôes');
+
+    event.preventDefault();
+
+    produtos.forEach(function(produto) {
+
+        const promocao = produto.querySelector('.badge');
+
+        if (promocao) {
+            produto.style.display = '';
+        } else {
+            produto.style.display = 'none';
+        }
+    });
+
+});
+
+
+const menuContato = document.getElementById('menu-contato');
+
+console.log(menuContato);
+
+menuContato.addEventListener('click', function(event) {
+
+    console.log('Clique em Contato');
+
+    event.preventDefault();
+
+    const contato = document.getElementById('contato');
+
+    contato.scrollIntoView({
+        behavior: 'smooth'
+    });
+
+});
 
 
 
@@ -45,9 +294,9 @@ pesquisa.addEventListener('keyup', function(){
         const nomeProduto = produto.querySelector('h2').textContent.toLowerCase();
 
 
-        console.log(nomeProduto, termoPesquisaPesquisa);      
+        console.log(nomeProduto, termoPesquisa);      
 
-        if (nomeProduto.includes(termoPesquisaPesquisa)) {
+        if (nomeProduto.includes(termoPesquisa)) {
 
             console.log("Mostrar:", nomeProduto);
 
@@ -129,12 +378,50 @@ botoesComprar.forEach(function(botaoComprar){
 //MODAL DOS PRODUTOS
 //================================================================================================
 
+const botaoComprarModal = document.querySelector('.btn-comprar-modal');
+
+let produtoSelecionadoModal = null;
+
+botaoComprarModal.addEventListener('click', function() {
+    if (!produtoSelecionadoModal) {
+        return;
+    }
+const nome = produtoSelecionadoModal.querySelector('h2').textContent;
+const preco = produtoSelecionadoModal.querySelector('.preco').textContent;
+const imagem = produtoSelecionadoModal.querySelector('img').src;
+const valor = Number(preco.replace('R$', '').replace(',', '.'));
+const produtoExistente = carrinho.find(function(item) {
+    return item.nome === nome;    
+});
+
+if (produtoExistente) {
+    produtoExistente.quantidade++;
+} else {
+    carrinho.push({
+        nome: nome,
+        preco: valor,
+        quantidade: 1,
+        imagem: imagem
+    });
+}
+salvarCarrinho();
+atualizarCarrinho();
+});
+
+
+
+
+
+
 botoesDetalhes.forEach(function(botao) {
+
     botao.addEventListener('click', function() {        
+        
         const produto = botao.closest('.produto');
+        produtoSelecionadoModal = produto;
         const nome = produto.querySelector('h2').textContent;
         const imagem = produto.querySelector('img').src;
-        const preco = produto.querySelector('.preco').textContent
+        const preco = produto.querySelector('.preco').textContent;
         const descricao = produto.querySelector('p:last-of-type').textContent;             
 
         modal.querySelector('.modal-nome').textContent = nome;

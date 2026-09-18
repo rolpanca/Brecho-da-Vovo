@@ -29,12 +29,12 @@
 
 
             <ul class="menu">
-                <li> <a href="#">Inicio</a> </li>
-                <li> <a href="#">Masculino</a> </li>
-                <li> <a href="#">Feminino</a> </li>
-                <li> <a href="#">Infantil</a> </li>
-                <li> <a href="#">Promoções</a> </li>
-                <li> <a href="#">Contato</a> </li>
+                <li> <a href="#" id="menu-inicio">Inicio</a> </li>
+                <li> <a href="#" id="menu-masculino">Masculino</a> </li>
+                <li> <a href="#" id="menu-feminino">Feminino</a> </li>
+                <li> <a href="#" id="menu-infantil">Infantil</a> </li>
+                <li> <a href="#" id="menu-promocoes">Promoções</a> </li>
+                <li> <a href="#" id="menu-contato">Contato</a> </li>
 
                 <li>
                     <a href="carrinho.html" title="Ver carrinho" class="icone-carrinho">
@@ -180,11 +180,12 @@
     
     
         <section class="categorias">
-            <div class="categoria">Masculino</div>
-            <div class="categoria">Feminino</div>
-            <div class="categoria">Infantil</div>
-            <div class="categoria">Acessórios</div>
+            <div class="categoria" data-categoria="Masculino">Masculino</div>
+            <div class="categoria" data-categoria="Feminino">Feminino</div>
+            <div class="categoria" data-categoria="Infantil">Infantil</div>
+            <div class="categoria" data-categoria="Acessórios">Acessórios</div>
         </section>
+
     
         <section class="filtros">
     
@@ -192,15 +193,15 @@
     
             <div class="filtro-box">
     
-                <select>
-                    <option>Categoria</option>
+                <select id="filtro-categoria">
+                    <option value="">Categoria</option>
                     <option>Masculino</option>
                     <option>Feminino</option>
                     <option>Infantil</option>
                 </select>
     
-                <select>
-                    <option>Tamanho</option>
+                <select id="filtro-tamanho">
+                    <option value="">Tamanho</option>
                     <option>P</option>
                     <option>M</option>
                     <option>G</option>
@@ -208,11 +209,11 @@
                 </select>
     
     
-                <select>
-                    <option>Preço</option>
-                    <option>Até R$50</option>
-                    <option>Até R$100</option>
-                    <option>Acima de R$100</option>
+                <select id="filtro-preco">
+                    <option value="">Preço</option>
+                    <option value="50">Até R$50</option>
+                    <option value="100">Até R$100</option>
+                    <option value="100+">Acima de R$100</option>
                 </select>
     
     
@@ -225,13 +226,14 @@
     
     
     
-            <section class="produtos">
+            <section class="produtos" id="produtos">
     
-                <article class="produto" data-id="1">
+                <article class="produto" data-id="1" data-categoria="Masculino">
     
                     <span class="badge">PROMOÇÃO</span>
     
                     <img src="img/camisa.png" alt="">
+                     
     
                     <h2>Camisa</h2>
     
@@ -249,7 +251,7 @@
     
                 </article>
     
-                <article class="produto" data-id="2">
+                <article class="produto" data-id="2" data-categoria="Masculino">
     
                     <span class="badge">PROMOÇÃO</span>
     
@@ -272,7 +274,7 @@
     
                 </article>
     
-                <article class="produto" data-id="3">
+                <article class="produto" data-id="3" data-categoria="Feminino">
     
                     <span class="badge">PROMOÇÃO</span>
     
@@ -280,7 +282,7 @@
     
                     <h2>Blusa</h2>
     
-                    <p class="preco"> R$49,90 </p>
+                    <p class="preco"> R$150,90 </p>
     
                      <div class="avaliacao">
                         ★★★☆☆
@@ -294,6 +296,8 @@
                     </div>
     
                 </article>
+
+                <p id="mensagem-produtos">Nenhum produto encontrado com esses filtros.</p>
     
             </section>
     
@@ -403,6 +407,41 @@
     
         </section>
 </main>
+
+
+<section id="contato">
+
+    <h2>Contato</h2>
+
+    <p>
+        Ficou com alguma dúvida? Entre em contato com o Meu Brechó.
+    </p>
+
+    <div class="contato-info">
+
+        <div class="contato-item">
+            <i class="fa-brands fa-whatsapp"></i>
+            <h3>WhatsApp</h3>
+            <p>Fale conosco pelo WhatsApp.</p>
+        </div>
+
+        <div class="contato-item">
+            <i class="fa-brands fa-envelope"></i>
+            <h3>E-mail</h3>
+            <p>Envie sua mensagem pro e-mail.</p>
+        </div>
+
+        <div class="contato-item">
+            <i class="fa-brands fa-instagram"></i>
+            <h3>Instagram</h3>
+            <p>Acompanhe o Meu Brechó nas redes sociais.</p>
+        </div>
+
+
+
+    </div>
+
+</section>
 
 
 
