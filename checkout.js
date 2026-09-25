@@ -23,6 +23,13 @@ const usuarioLogado = JSON.parse(localStorage.getItem(
     'usuarioLogado')
 );
 
+if (!usuarioLogado) {
+    alert('Você precisa estar logado para finalizar uma compra.');
+    window.location.href = 'login.html';
+}
+
+
+
 if (usuarioLogado) {
     nome.value = usuarioLogado.nome;
     email.value = usuarioLogado.email;
@@ -143,22 +150,48 @@ if (carrinhoSalvo) {
 
 atualizarCheckout();
 
+if (carrinho.length === 0) {
+    alert('Seu carrinho está vazio.')
+    window.location.href = 'carrinho.html';
+}
+
 
 
     btnFinalizar.addEventListener('click', function() {
         
         if (
-            nome.value === '' ||
-            email.value === '' ||
-            telefone.value === '' ||
-            cep.value === '' ||
-            rua.value === '' ||
-            numero.value === '' ||
-            bairro.value === '' ||
-            cidade.value === '' ||
-            estado.value === '' 
+            nome.value.trim() === '' ||
+            email.value.trim() === '' ||
+            telefone.value.trim() === '' ||
+            cep.value.trim() === '' ||
+            rua.value.trim() === '' ||
+            numero.value.trim() === '' ||
+            bairro.value.trim() === '' ||
+            cidade.value.trim() === '' ||
+            estado.value.trim() === '' 
         ) {
             alert('Preencha todos os campos obrigatóros!');
+            return;
+        }
+
+        const emailTexto = email.value.trim();
+        const nomeTexto = nome.value.trim();
+
+        const nomeValido = /^[A-Za-zÀ-ÿ\s]+$/.test(nomeTexto);
+        if (!nomeValido) {
+            alert('Digite um nome válido.');
+            return;
+        }
+
+        if (nomeTexto.length < 3) {
+            alert('O nome deve ter pelo menos 3 caracteres.');
+            return;
+        }
+
+
+        const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTexto);
+        if (!emailValido) {
+            alert('Digite um e-mail válido.');
             return;
         }
 
@@ -169,6 +202,27 @@ atualizarCheckout();
                 pagamentoSelecionado = true;
             }
         });
+
+
+        const cepNumeros = cep.value.replace(/\D/g, '');
+
+        if (cepNumeros.length !== 8) {
+            alert('Digite um CEP válido.');
+            return;
+        }
+
+        const telefoneNumero = telefone.value.replace(/\D/g, '');
+
+        if (telefoneNumero.length !== 10 && telefoneNumero.length !== 11) {
+            alert('Digite um telefone válido.');
+            return;
+        }
+
+        if (/^(\d)\1+$/.test(telefoneNumero)) {
+            alert('Digite um telefone válido.');
+            return;
+        }
+
 
         if (!pagamentoSelecionado) {
             alert('Selecione uma forma de pagamento!');
@@ -205,18 +259,18 @@ const pedido = {
     data: new Date().toISOString(),
 
     cliente: {
-        nome: nome.value,
-        email: email.value,
-        telefone: telefone.value
+        nome: nomeTexto,
+        email: emailTexto,
+        telefone: telefoneNumero
     },
 
     endereco: {
-        cep: cep.value,
-        rua: rua.value,
-        numero: numero.value,
-        bairro: bairro.value,
-        cidade: cidade.value,
-        estado: estado.value
+        cep: cepNumeros,
+        rua: rua.value.trim(),
+        numero: numero.value.trim(),
+        bairro: bairro.value.trim(),
+        cidade: cidade.value.trim(),
+        estado: estado.value.trim()
     },
 
     produtos: carrinho,
@@ -249,11 +303,7 @@ localStorage.setItem(
 
 
 
-// localStorage.setItem('pedidoAtual', JSON.stringify(pedido));
 
-
-// localStorage.setItem('totalPedido', totalPedido);
-// localStorage.setItem('formaPagamento', formaPagamento);
 
 
 
@@ -269,9 +319,7 @@ btnFinalizar.textContent = 'Processando...';
 
         carrinho = [];
 
-       // const numeroPedido = Math.floor(Math.random() * 900000 + 100000);
-
-       // localStorage.setItem('numeroPedido', numeroPedido);
+      
 
         setTimeout(function() {
             window.location.href = 'confirmacao.html';

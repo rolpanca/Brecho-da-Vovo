@@ -5,6 +5,78 @@ const modal = document.querySelector('.modal');
 const botoesDetalhes = document.querySelectorAll('.btn-detalhes');
 const botaoFechar = document.querySelector('.fechar');
 
+const emailNewsletter = document.getElementById('email-newsletter');
+const btnNewsletter = document.getElementById('btn-newsletter');
+
+btnNewsletter.addEventListener('click', function() {
+    const email = emailNewsletter.value.trim();
+
+    if (email === '') {
+        alert('Digite seu e-mail.');
+        return;
+    }
+
+    if (!email.includes('@')) {
+        alert('Digite um e-mail válido.');
+        return;
+    };
+
+    if (!email.includes('.')) {
+        alert('Digite um e-mail válido.');
+        return;
+    }
+
+    if (email.startsWith('@') || email.endsWith('@') || email.startsWith('.') || email.endsWith('.')) {
+       alert('Digite um e-mail válido.');
+        return;
+    }
+
+    if (email.indexOf('@') !== email.lastIndexOf('@')) {
+        alert('Digite um e-mail válido.');
+        return;
+    }
+
+    if (email.indexOf('@') === 0 || email.indexOf('@') === email.length - 1) {
+        alert('Digite um e-mail válido.')
+        return;
+    }
+    
+    if (email.indexOf('.') === email.indexOf('@') + 1) {
+        alert('Digite um e-mail válido');
+        return;
+    }
+
+    if (email.indexOf('.') === email.indexOf('@') - 1) {
+        alert('Digite um e-mail válido.');
+        return;
+    }
+
+    if (email.includes('..')) {
+        alert('Digite um e-mail válido.');
+        return;
+    }
+
+    if (email.indexOf('@') < 1) {
+        alert('Digite um e-mail válido.');
+        return;
+    }
+
+    let inscritos = JSON.parse(localStorage.getItem('inscritosNewsletter')) || [];
+
+    if (inscritos.includes(email)) {
+        alert('Este e-mail já está cadastrado.');
+        return;
+    }
+
+    inscritos.push(email);
+
+    localStorage.setItem('inscritosNewsletter', JSON.stringify(inscritos));
+    alert('E-mail cadastrado com sucesso!');
+
+});
+
+
+
 
 const listaCarrinho = document.getElementById('lista-carrinho');
 const totalCarrinho = document.querySelector('.total');
@@ -82,7 +154,7 @@ botaoFiltrar.addEventListener('click', function() {
             : valorProduto <= Number(precoEscolhido);
 
 
-        console.log(('preço escolhido:', precoEscolhido))
+        console.log('preço escolhido:', precoEscolhido);
 
         console.log('Preco encontrado:', precoEncontrado);
 
@@ -115,7 +187,7 @@ botaoFiltrar.addEventListener('click', function() {
     if (quantidadeEncontrada === 0) {
         mensagemProdutos.style.display = 'block';
     } else {
-        mensagemProdutos.style.display - 'none';
+        mensagemProdutos.style.display = 'none';
     }
 
 });
@@ -384,8 +456,15 @@ let produtoSelecionadoModal = null;
 
 botaoComprarModal.addEventListener('click', function() {
     if (!produtoSelecionadoModal) {
-        return;
+        return;        
     }
+
+    if (!verificarLogin()) {
+        alert('Você precisa esta logado para adiciona produtos ao carrinho');
+        window.location.href = 'login.html';
+
+    }      
+
 const nome = produtoSelecionadoModal.querySelector('h2').textContent;
 const preco = produtoSelecionadoModal.querySelector('.preco').textContent;
 const imagem = produtoSelecionadoModal.querySelector('img').src;
@@ -406,6 +485,10 @@ if (produtoExistente) {
 }
 salvarCarrinho();
 atualizarCarrinho();
+modal.style.display = 'none';
+
+alert('Produto adicionado ao carrinho');
+
 });
 
 
@@ -623,5 +706,7 @@ if (verificarLogin()) {
 }else {
     console.log('Nenhum usuário esta logado.')
 }
+
+
 
 
