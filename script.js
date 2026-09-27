@@ -706,6 +706,94 @@ if (verificarLogin()) {
 }else {
     console.log('Nenhum usuário esta logado.')
 }
+//-----------------------------------------------
+//Campo opinia Cliente//
+//---------------------------------------------
+const nomeDepoimento = document.getElementById('nome-depoimento');
+const opiniaoDepoimento = document.getElementById('opiniao-depoimento');
+const btnEnviarDepoimento = document.getElementById('btn-enviar-depoimento');
+
+const caixaDepoimentos = document.querySelector('.depoimentos-box');
+
+let depoimentos = [];
+
+const depoimentosSalvos = localStorage.getItem('depoimentos')
+
+if (depoimentosSalvos) {
+        depoimentos = JSON.parse(depoimentosSalvos);
+
+        depoimentos.forEach(function(depoimento) {
+            const novoDepoimento = document.createElement('div');
+            novoDepoimento.classList.add('depoimento-item');
+
+            const estrelas = document.createElement('div');
+            estrelas.classList.add('estrelas');
+            estrelas.textContent = '★★★★★';
+
+            const textoOpiniao = document.createElement('p'); 
+            textoOpiniao.textContent = depoimento.opiniao;
+
+            const nomeCliente = document.createElement('h4');
+            nomeCliente.textContent = '- ' + depoimento.nome;
+
+            novoDepoimento.appendChild(estrelas);
+            novoDepoimento.appendChild(textoOpiniao);
+            novoDepoimento.appendChild(nomeCliente);
+
+            caixaDepoimentos.appendChild(novoDepoimento);
+            
+        });
+}  
+
+
+
+btnEnviarDepoimento.addEventListener('click', function() {
+    if (nomeDepoimento.value.trim() === '') {
+        alert('Digite seu nome.');
+        return;
+    }
+
+    if (opiniaoDepoimento.value.trim() === '') {
+        alert('Digite sua opinião.');
+        return;
+    }
+
+    const nome = nomeDepoimento.value.trim();
+    const opiniao = opiniaoDepoimento.value.trim();
+
+    depoimentos.push({
+        nome: nome,
+        opiniao: opiniao
+    });
+    
+    localStorage.setItem('depoimentos', JSON.stringify(depoimentos));
+
+    console.log(nome);
+    console.log(opiniao);
+
+    const novoDepoimento = document.createElement('div');
+    novoDepoimento.classList.add('depoimento-item');
+
+    const estrelas = document.createElement('div');
+    estrelas.classList.add('estrelas');
+    estrelas.textContent = '★★★★★';
+
+    const textoOpiniao = document.createElement('p');
+    textoOpiniao.textContent = opiniao;
+
+    const nomeCliente = document.createElement('h4');
+    nomeCliente.textContent = '- ' + nome;
+
+    novoDepoimento.appendChild(estrelas);    
+    novoDepoimento.appendChild(textoOpiniao);
+    novoDepoimento.appendChild(nomeCliente);
+    caixaDepoimentos.appendChild(novoDepoimento);
+
+    nomeDepoimento.value = '';
+    opiniaoDepoimento.value = '';
+    
+});
+
 
 
 
