@@ -795,6 +795,148 @@ btnEnviarDepoimento.addEventListener('click', function() {
 });
 
 
+const botoesDestaque = document.querySelectorAll('.btn-destaque');
+botoesDestaque.forEach(function(botao) {
+    botao.addEventListener('click', function() {
+        const idProduto = botao.dataset.id;
+
+        const produto = document.querySelector(`.produto[data-id="${idProduto}"]`);
+        produto.querySelector('.btn-detalhes').click();
+    });
+
+});
+
+
+
+
+const entregaGarantida = document.getElementById('entrega-garantida');
+entregaGarantida.addEventListener('click', function() {
+    const infoEntrega = entregaGarantida.querySelector('.info-entrega');
+    
+    if (infoEntrega.style.display === 'none') {
+        infoEntrega.style.display = 'block';
+    } else {
+        infoEntrega.style.display = 'none';
+    }
+});
+
+
+const trocaFacil = document.getElementById('troca-facil');
+trocaFacil.addEventListener('click', function() {
+    const infoTroca = trocaFacil.querySelector('.info-troca');
+
+    if (infoTroca.style.display === 'none') {
+        infoTroca.style.display = 'block';
+    } else {
+        infoTroca.style.display = 'none';
+    }
+});
+
+const suporte = document.getElementById('suporte');
+suporte.addEventListener('click', function() {
+    const infoSuporte = suporte.querySelector('.info-suporte');
+
+    if (infoSuporte.style.display === 'none') {
+        infoSuporte.style.display = 'block';
+    } else {
+        infoSuporte.style.display = 'none';
+    }
+});
+
+const compraSegura = document.querySelector('#compra-segura');
+compraSegura.addEventListener('click', function() {
+    const infoSeguranca = compraSegura.querySelector('.info-seguranca');
+    infoSeguranca.classList.toggle('ativo');
+});
+
+
+
+
+
+
+
+
+const pagamentoCartao = document.getElementById('pagamento-cartao');
+const infoCartao = document.getElementById('info-cartao');
+
+pagamentoCartao.addEventListener('click', function() {
+    alert('pagamento com cartão de credito selecionado');
+
+    infoCartao.textContent = 'Aceitamos cartões de crédito.';
+    if (infoCartao.style.display === 'none') {
+        infoCartao.style.display = 'block';
+    } else {
+        infoCartao.style.display = 'none';
+    }
+});
+
+const pagamentoPix = document.getElementById('pagamento-pix');
+const infoPix = document.getElementById('info-pix');
+
+pagamentoPix.addEventListener('click', function() {
+    alert('Pagamento com Pix selecionado');
+
+    infoPix.textContent = 'Aceitamos pagamentos via pix.';
+
+    if (infoPix.style.display === 'none') {
+        infoPix.style.display = 'block';
+    } else {
+        infoPix.style.display = 'none';
+    }
+});
+
+const pagamentoBoleto = document.getElementById('pagamento-boleto');
+const infoBoleto = document.getElementById('info-boleto');
+
+pagamentoBoleto.addEventListener('click', function() {
+    alert('Pagamento com Boleto bancário selecionado');
+
+    infoBoleto.textContent = 'Você pode pagar se pedido usando boleto bancário.';
+    
+    if (infoBoleto.style.display === 'none') {
+        infoBoleto.style.display = 'block';
+    } else {
+        infoBoleto.style.display = 'none';
+    }
+});
+
+
+
+
+
+
+
+
+
+
+const entregaBrasil = document.getElementById('entrega-brasil');
+const infoEntregaBrasil = document.getElementById('info-entrega-brasil');
+entregaBrasil.addEventListener('click', function() {    
+     infoEntregaBrasil.textContent = 'Enviamos nossos produtos para todo o entregaBrasil.';
+     infoEntregaBrasil.style.display = infoEntregaBrasil.style.display === 'none' ? 'block' : 'none';
+});
+
+
+const entregaGratis = document.getElementById('entrega-gratis');
+const infoEntregaGratis = document.getElementById('info-entrega-gratis');
+entregaGratis.addEventListener('click', function() {    
+    infoEntregaGratis.textContent = 'Você ganha frete grátis acima de R$150.'; 
+    infoEntregaGratis.style.display = infoEntregaGratis.style.display === 'none' ? 'block' : 'none'; 
+});
+
+const prazoEntrega = document.getElementById('prazo-entrega');
+const infoPrazoEntrega = document.getElementById('info-prazo-entrega');
+prazoEntrega.addEventListener('click', function() {
+    // alert('Prazo de entrega de 3 a 10 dia!');
+    infoPrazoEntrega.textContent = 'O prazo de Entrega de 3 a 10 dias úteis.';
+    infoPrazoEntrega.style.display = infoPrazoEntrega.style.display === 'none' ? 'block' : 'none';
+});
+
+
+
+
+
+
 
 
 

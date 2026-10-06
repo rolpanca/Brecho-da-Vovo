@@ -1565,6 +1565,47 @@ SEÇÃO CONTATO
 }
 
 
+.info-seguranca {
+    display: none;
+}
+.info-seguranca.ativo {
+    display: block;
+}
+
+.info-seguranca, .info-entrega, .info-troca, .info-suporte {
+    display: none;
+}
+
+
+.voltar-topo {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background: #0a8f08;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.30);
+    transition: 0.3s;
+    z-index: 1000;
+
+    animation: pulsar 2s infinite;
+}
+.voltar-topo:hover {
+    background: #087307;
+    transform: translateY(-5px) scale(1.08);
+}
+
+
+
+
+
 
 
 
@@ -1759,10 +1800,12 @@ SEÇÃO CONTATO
     align-items: center;
   }
   .selo-item {
-    width: 90%;
+    width: 90%;    
   }
+ .clicavel {
+    cursor: pointer !important;
+ }
 
-}
 
 .sobre {
     background: white;
@@ -1808,30 +1851,7 @@ SEÇÃO CONTATO
 }
 
 
-.voltar-topo {
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    background: #0a8f08;
-    color: white;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.30);
-    transition: 0.3s;
-    z-index: 1000;
 
-    animation: pulsar 2s infinite;
-}
-.voltar-topo:hover {
-    background: #087307;
-    transform: translateY(-5px) scale(1.08);
-}
 .btn-voltar-loja {
     text-decoration: none;
 }

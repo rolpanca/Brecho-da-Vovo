@@ -95,18 +95,21 @@
                     <img src="img/camisa.png" alt="Camisa em algodão">
                     <h3>Camisa premium</h3>
                     <p>Mais vendido da semana</p>
+                    <button class="btn-destaque" data-id="1">Ver produto</button>
                 </div>
     
                 <div class="destaque-item">
                     <img src="img/blusa1.png" alt="Blusa feminina">
                     <h3>Blusa Elegante</h3>
                     <p>Nova coleção</p>
+                    <button class="btn-destaque" data-id="3">Ver produto</button>
                 </div>
     
                 <div class="destaque-item">
                     <img src="img/calça jeans1.png" alt="Calça Jeans azul">
                     <h3>Calça Jeans</h3>
                     <p>Oferta especial</p>
+                    <button class="btn-destaque" data-id="2">Ver produto</button>
                 </div>
     
             </div>
@@ -150,28 +153,32 @@
     
             <div class="selos-box">
     
-                <div class="selo-item">
+                <div class="selo-item clicavel" id="compra-segura">
                     <i class="fa-solid fa-shield-halved"></i>
                     <h3>Compra Segura</h3>
                     <p>Proteção total em todas as compras.</p>
+                    <p class="info-seguranca">Seus dados são protegidos e sua compra é realizadas com segurança.</p>
                 </div>
     
-                <div class="selo-item">
+                <div class="selo-item clicavel" id="entrega-garantida">
                     <i class="fa-solid fa-truck-fast"></i>
                     <h3>Entrega Garantida</h3>
                     <p>Seu pedido chega com Segurança.</p>
+                    <p class="info-entrega">Acompanhe seu pedido e receba sua compra com segurança.</p>
                 </div>
     
-                <div class="selo-item">
+                <div class="selo-item clicavel" id="troca-facil">
                     <i class="fa-solid fa-rotate-left"></i>
                     <h3>Troca Fácil</h3>
                     <p>Trocas simples e rápida.</p>
+                    <p class="info-troca">Faça sua troca de forma simples e rápida.</p>
                 </div>
     
-                <div class="selo-item">
+                <div class="selo-item clicavel" id="suporte">
                     <i class="fa-solid fa-headset"></i>
                     <h3>Suporte</h3>
                     <p>Atendimento rápido e eficiente.</p>
+                    <p class="info-suporte">Entre em contato conosco sempre precisar de ajuda.</p>
                 </div>
     
             </div>
@@ -310,19 +317,22 @@
     
             <div class="pagamento-box">
     
-                <div class="pagamento-item">
+                <div class="pagamento-item" id="pagamento-cartao">
                     <i class="fa-solid fa-credit-card"></i>
-                    <p>Cartão de Créddito</p>
+                    <p>Cartão de Crédito</p>
+                    <small id="info-cartao" style="display: none;"></small>
                 </div>
     
-                <div class="pagamento-item">
+                <div class="pagamento-item" id="pagamento-pix">
                     <i class="fa-solid fa-money-bill-wave"></i>
                     <p>Pix</p>
+                    <small id="info-pix" style="display: none;"></small>
                 </div>
     
-                <div class="pagamento-item">
+                <div class="pagamento-item" id="pagamento-boleto">
                     <i class="fa-solid fa-barcode"></i>
-                    <p>Boleto Bancario</p>
+                    <p>Boleto Bancário</p>
+                    <small id="info-boleto" style="display: none;"></small>
                 </div>
     
     
@@ -338,19 +348,22 @@
     
             <div class="entrega-box">
     
-                <div class="entrega-item">
+                <div class="entrega-item" id="entrega-brasil">
                     <i class="fa-solid fa-truck"></i>
                     <p>Entregamos para todo Brasil</p>
+                    <small id="info-entrega-brasil" style="display: none;"></small>
                 </div>
     
-                <div class="entrega-item">
+                <div class="entrega-item" id="entrega-gratis">
                     <i class="fa-solid fa-box-open"></i>
-                    <p>Frente grátis acima de R$150</p>
+                    <p>Frete grátis acima de R$150</p>
+                    <small id="info-entrega-gratis" style="display: none;"></small>
                 </div>
     
-                <div class="entrega-item">
+                <div class="entrega-item" id="prazo-entrega">
                     <i class="fa-solid fa-clock"></i>
                     <p>Prazo de entrega de 3 a 10 dias</p>
+                    <small id="info-prazo-entrega" style="display: none;"></small>
                 </div>
     
             </div>
@@ -469,9 +482,9 @@
         <p>&copy; 2026 Meu Brechó - Todos os direitos reservados</p>
 
         <div class="redes-sociais">
-            <a href="#"> <i class="fa-brands fa-instagram"></i> </a>
-            <a href="#"> <i class="fa-brands fa-whatsapp"></i> </a>
-            <a href="#"> <i class="fa-brands fa-facebook"></i> </a>
+            <a href="https://www.instagram.com/meubrecho" target="_blank"> <i class="fa-brands fa-instagram"></i> </a>
+            <a href="https://wa.me/5519987598996" target="_blank"> <i class="fa-brands fa-whatsapp"></i> </a>
+            <a href="https://www.facebook.com/francisco.ramos.503/" target="_blank"> <i class="fa-brands fa-facebook"></i> </a>
             <a href="#"> <i class="fa-brands fa-tiktok"></i> </a>
         </div>
 
