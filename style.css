@@ -141,12 +141,11 @@ nav {
    PRODUTOS
 ===================================================================*/   
 .produtos {    
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 30px;
-    flex-wrap: wrap;
-   
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 280px));   
+    justify-content: center;  
+    gap: 25px;
+    padding: 30px;     
 }
 
 .produto {
@@ -155,9 +154,10 @@ nav {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; 
+    width: auto;
 
-    width: 320px;
+
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 10px;
@@ -174,7 +174,7 @@ nav {
 }
 .produto img {
     width: 100%;
-    height: 280px;
+    height: 220px;
     object-fit: contain;
 }
 .produto:hover {
@@ -185,6 +185,7 @@ nav {
     font-weight: bold;
     letter-spacing: 1px;
     margin: 15px 0;
+    min-height: 24px;
 }
 .produto p {
     flex-grow: 1;
@@ -1631,6 +1632,7 @@ SEÇÃO CONTATO
 /*COMEÇA O MEDIA QUERY*/
 
 @media (max-width: 768px) {
+
     header {
         padding: 8px 8px;
         text-align: center;
@@ -1663,16 +1665,16 @@ SEÇÃO CONTATO
 
 
     .produtos {
-        display: flex;
-        flex-wrap: wrap;
-        
-        justify-content: center;
-        gap: 20px;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+        padding: 15px;              
     }
 
     .produto {
-        width: 90%;
-        max-width: 350px;      
+        width: auto;
+        max-width: none;  
+        padding: 12px;    
     }
 
     .produto img {
@@ -1945,6 +1947,7 @@ footer {
 
 
 @media (max-width: 768px) {
+
     .item-carrinho {
         flex-direction: column;
         text-align: center;

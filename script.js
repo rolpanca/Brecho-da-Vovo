@@ -253,8 +253,20 @@ menuMasculino.addEventListener('click', function(event) {
  console.log('Clique no Masculino');
 
     event.preventDefault();
+
     filtrarPorCategoria('Masculino');
+
+    const secaoProdutos = document.getElementById('produtos');
+
+    secaoProdutos.scrollIntoView({
+        behavior: 'smooth'
+    });
+
 });
+
+
+
+
 
 const menuFeminino = document.getElementById('menu-feminino');
 
@@ -266,7 +278,15 @@ menuFeminino.addEventListener('click', function(event) {
     event.preventDefault();
 
     filtrarPorCategoria('Feminino');
+
+    const secaoProdutos = document.getElementById('produtos');
+
+    secaoProdutos.scrollIntoView({
+        behavior: 'smooth'
+    })
 });
+
+
 
 const menuInicio = document.getElementById('menu-inicio');
 
@@ -279,8 +299,16 @@ menuInicio.addEventListener('click', function(event) {
     event.preventDefault();
 
     mostrarTodosProdutos();
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
     
 });
+
+
+
 
 
 const menuInfantil = document.getElementById('menu-infantil');
@@ -294,7 +322,16 @@ menuInfantil.addEventListener('click', function(event) {
     event.preventDefault();
 
     filtrarPorCategoria('Infantil');
+
+    const secaoProdutos = document.getElementById('produtos');
+
+    secaoProdutos.scrollIntoView({
+        behavior: 'smooth'
+    });
+
 });
+
+
 
 
 const menuPromocoes = document.getElementById('menu-promocoes');
@@ -316,6 +353,12 @@ menuPromocoes.addEventListener('click', function(event) {
         } else {
             produto.style.display = 'none';
         }
+    });
+
+    const secaoProdutos = document.getElementById('produtos');
+
+    secaoProdutos.scrollIntoView({
+        behavior: 'smooth'
     });
 
 });
@@ -356,10 +399,13 @@ let index = 0;
 //=======================================================================================
  //  Código de pesquisa
  
+ let produtoEncontradoNaBusca = false;
 
 pesquisa.addEventListener('keyup', function(){
 
-    const termoPesquisa = pesquisa.value.toLowerCase();   
+    const termoPesquisa = pesquisa.value.toLowerCase();  
+    
+    produtoEncontradoNaBusca = false;
 
     produtos.forEach(function(produto){
 
@@ -373,6 +419,16 @@ pesquisa.addEventListener('keyup', function(){
             console.log("Mostrar:", nomeProduto);
 
             produto.style.display = '';
+
+            if (!produtoEncontradoNaBusca) {
+
+                produto.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+            produtoEncontradoNaBusca = true;
+            }           
+
         }else {
             produto.style.display = 'none';
         }        
