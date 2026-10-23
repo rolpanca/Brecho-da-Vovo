@@ -6,6 +6,30 @@ const totalCarrinho = document.getElementById('total-carrinho-pagina');
 
 let carrinho = [];
 let total = 0;
+const ESTOQUE_INICIAL = {
+'1': 2,
+'2': 4,
+'3': 3
+};
+
+function carregarEstoque() {
+    const estoqueSalvo = localStorage.getItem('estoqueProdutos');
+
+    if (estoqueSalvo !== null) {
+        return JSON.parse(estoqueSalvo);
+    }
+
+    localStorage.setItem(
+        'estoqueProdutos',
+        JSON.stringify(ESTOQUE_INICIAL)
+    );
+
+    return { ...ESTOQUE_INICIAL };
+}
+
+let estoqueProdutos = carregarEstoque();
+
+
 
 function obterChaveCarrinho() {
     const usuarioLogado = JSON.parse(
@@ -126,22 +150,43 @@ function carregarCarrinho () {
             const botaoMenos = item.querySelector('.btn-menos');
 
             botaoMais.addEventListener('click', function() {
+
+                const idProduto = produto.id;
+                const quantidadeDisponivel = estoqueProdutos[idProduto] ?? 0;
+
+                if (quantidadeDisponivel <= 0) {
+                    alert('Estoque insuficiente! Não há mais unidades disponíveis.');
+                    return;
+                }
+
                 produto.quantidade++;
 
+                estoqueProdutos[idProduto]--;
+
+                localStorage.setItem(
+                    'estoqueProdutos',
+                    JSON.stringify(estoqueProdutos)
+                );
+
                 salvarCarrinho();
-
                 atualizarCarrinho();
-
             });
             
             botaoMenos.addEventListener('click', function() {
 
+                const idProduto = produto.id;
+
                 if (produto.quantidade > 1) {
                     produto.quantidade--;
+                    estoqueProdutos[idProduto]++;
                 }else {
+                    estoqueProdutos[idProduto]++;
+
                     const indice = carrinho.indexOf(produto);
                     carrinho.splice(indice, 1);
                 }
+
+                localStorage.setItem('estoqueProdutos', JSON.stringify(estoqueProdutos));
 
                 salvarCarrinho();
                 atualizarCarrinho();
@@ -161,8 +206,18 @@ function carregarCarrinho () {
 
 
             botaoRemover.addEventListener('click', function(){
+
+                const idProduto = produto.id;
+
+                estoqueProdutos[idProduto] += produto.quantidade;
+
                 const indice = carrinho.indexOf(produto);
                 carrinho.splice(indice, 1);
+
+                localStorage.setItem(
+                    'estoqueProdutos',
+                    JSON.stringify(estoqueProdutos)
+                );
 
                 salvarCarrinho();
                 atualizarCarrinho();

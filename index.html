@@ -24,7 +24,7 @@
 
             <input type="text" id="pesquisa" placeholder="Pesquisar produtos...">
 
-            <button>Buscar</button>
+            <button id="btn-pesquisar">Buscar</button>
         </div>
 
 
@@ -138,7 +138,7 @@
                 </div>
     
                 <div class="sobre-imagem">
-                    <img src="img/WhatsApp_Image_2025-02-01_at_09.30.39-removebg-preview.png" alt="Logo do Meu Meu-Brechó">
+                    <img src="img/WhatsApp_Image_2025-02-01_at_09.30.39-removebg-preview.png" alt="Logo do  Meu-Brechó">
                 </div>
     
             </div>
@@ -235,16 +235,15 @@
     
             <section class="produtos" id="produtos">
     
-                <article class="produto" data-id="1" data-categoria="Masculino">
-    
-                    <span class="badge">PROMOÇÃO</span>
-    
-                    <img src="img/camisa.png" alt="Camisa em algodão">
-                     
+                <article class="produto" data-id="1" data-categoria="Masculino">    
+                    <span class="badge">PROMOÇÃO</span>    
+                    <img src="img/camisa.png" alt="Camisa em algodão">                     
     
                     <h2>Camisa</h2>
     
                     <p class="preco"> R$39,90 </p>
+
+                    <p class="estoque">Estoque: <span>2</span> unidade</p>
     
                     <div class="avaliacao">
                         ★★★★★
@@ -267,6 +266,8 @@
                     <h2>Calça Jeans</h2>
     
                     <p class="preco"> R$69,90 </p>
+
+                    <p class="estoque">Estoque: <span>4</span> unidades</p>
     
                      <div class="avaliacao">
                         ★★★★☆
@@ -290,6 +291,8 @@
                     <h2>Blusa</h2>
     
                     <p class="preco"> R$150,90 </p>
+
+                    <p class="estoque">Estoque: <span>3</span> unidades</p>
     
                      <div class="avaliacao">
                         ★★★☆☆
@@ -304,7 +307,7 @@
     
                 </article>
 
-                <p id="mensagem-produtos">Nenhum produto encontrado com esses filtros.</p>
+                <p id="mensagem-produtos" style="display: none;">Nenhum produto encontrado com esses filtros.</p>
     
             </section>
     

@@ -63,8 +63,15 @@ if (!usuarioLogado) {
                     produtosHTML += `
                         <div class="produto-pedido">
 
-                            <p>
+                            ${produto.imagem ?`
+                            <img 
+                                src="${produto.imagem}"
+                                alt="${produto.nome}"
+                                style="width: 100px; height: 100px; object-fit: contain;"
+                            >                            
+                            ` : ''}
 
+                            <p>
                                 <strong>
                                     ${produto.nome}
                                 </strong>
@@ -168,19 +175,34 @@ if (!usuarioLogado) {
 
                     let detalhes = '';
 
-                    detalhes += 'pedido #' + pedido.numero + '\n\n';
+                    detalhes += `
+                    <h3>Pedido #${pedido.numero}</h3>
 
-                    detalhes += 'Cliente: ' + (cliente.nome || 'Não informado') + '\n';
+                    <p>
+                        <strong>Cliente:</strong>
+                        ${cliente.nome || 'Não informado'}
+                    </p>
 
-                    detalhes += 'E-mail: ' + (cliente.email || 'Não informado') + '\n';
+                    <p>
+                        <strong>Telefone:</strong>
+                        ${cliente.telefone || 'Não informado'}
+                    </p>  
+                    
+                    <p>
+                        <strong>Pagamento:</strong>
+                        ${pedido.pagamento || 'Não informado'}
+                    </p>    
 
-                    detalhes += 'Telefone: ' + (cliente.telefone || 'Não informado') + '\n\n';
+                    <p>
+                        <strong>Total:</strong>
+                        R$ ${total.toFixed(2).replace('.', ',')}
+                    </p>  
+                    
+                    <h4>Produto:</h4>
 
-                    detalhes += 'Pagamento: ' + (pedido.pagamento || 'Não informado') + '\n';
+                    `
 
-                    detalhes += 'Total: R$ ' + total.toFixed(2).replace('.', ',') + '\n\n';
-
-                    detalhes += 'Produtos:\n';
+                                      
 
                     if (pedido.produtos && pedido.produtos.length > 0) {
 
@@ -190,15 +212,35 @@ if (!usuarioLogado) {
 
                         const preco = Number(produto.preco || 0);
 
-                        detalhes += '\n' + produto.nome +' - Quantidade: ' + quantidade + ' - R$ ' + preco.toFixed(2).replace('.', ',');
+                        detalhes += `
+                            <div class="produto-pedido">
+                                ${produto.imagem ? `
+                                    <img
+                                        src="${produto.imagem}"
+                                        alt="${produto.nome}" 
+                                        style="width: 100px; height: 100px; object-fit: contain;"
+                                    >
+                                    ` : ''}
+
+                                    <p>
+                                        <strong>${produto.nome}</strong>
+                                        <br>
+                                        Quantidade: ${quantidade}
+                                        </br>
+                                        Preço: R$ ${preco.toFixed(2).replace('.', ',')}
+                                    </p>    
+                            </div>  
+                                
+                        `;                       
 
                     });                    
                     
                 } else {
-                    detalhes += 'Nenhum produto encontrado.';
+                    detalhes += '<p>Nenhum produto encontrado.</p>';
                 }
 
-                conteudoDetalhes.textContent = detalhes;
+                conteudoDetalhes.innerHTML = detalhes;
+                console.log(conteudoDetalhes.innerHTML);
                 modalDetalhes.style.display = 'flex';
 
             }

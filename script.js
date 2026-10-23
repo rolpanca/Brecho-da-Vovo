@@ -85,8 +85,8 @@ const botoesComprar = document.querySelectorAll('.btn-comprar');
 
 
 const pesquisa = document.getElementById('pesquisa');
-
 const produtos = document.querySelectorAll('.produto');
+
 const filtroCategoria = document.getElementById('filtro-categoria');
 const filtroTamanho = document.getElementById('filtro-tamanho');
 const filtroPreco = document.getElementById('filtro-preco');
@@ -394,6 +394,56 @@ let carrinho = [];
 let total = 0;
 let index = 0;
 
+const ESTOQUE_INICIAL = {
+    '1': 2,
+    '2': 4,
+    '3': 3
+};
+
+function carregarEstoque() {
+    const estoqueSalvo = localStorage.getItem('estoqueProdutos');
+
+    if (estoqueSalvo !== null) {
+        return JSON.parse(estoqueSalvo);
+    }
+
+    localStorage.setItem(
+        'estoqueProdutos',
+        JSON.stringify(ESTOQUE_INICIAL)
+    );
+
+    return {...ESTOQUE_INICIAL };
+
+}
+
+let estoqueProdutos = carregarEstoque();
+
+function atualizarEstoqueTela() {
+    const produtos = document.querySelectorAll('.produto');
+
+    produtos.forEach(function(produto) {
+        const idProduto = produto.dataset.id;
+        const textoEstoque = produto.querySelector('.estoque span');
+
+        if (textoEstoque && estoqueProdutos[idProduto] !== undefined) {
+            textoEstoque.textContent = estoqueProdutos[idProduto];
+        }
+    });
+}
+window.addEventListener('pageshow', function() {
+    estoqueProdutos = carregarEstoque();
+    atualizarEstoqueTela();
+})
+atualizarEstoqueTela();
+
+
+function salvarEstoque() {
+    localStorage.setItem(
+        'estoqueProdutos',
+        JSON.stringify(estoqueProdutos)
+    );
+}
+
 //=======================================================================================
 //PESQUISA DE produtos
 //=======================================================================================
@@ -410,11 +460,11 @@ pesquisa.addEventListener('keyup', function(){
     produtos.forEach(function(produto){
 
         const nomeProduto = produto.querySelector('h2').textContent.toLowerCase();
-
-
+        const descricaoProduto = produto.querySelector('p:not(.preco)').textContent.toLowerCase();
+        
         console.log(nomeProduto, termoPesquisa);      
 
-        if (nomeProduto.includes(termoPesquisa)) {
+        if (nomeProduto.includes(termoPesquisa) || descricaoProduto.includes(termoPesquisa)) {
 
             console.log("Mostrar:", nomeProduto);
 
@@ -444,7 +494,6 @@ pesquisa.addEventListener('keyup', function(){
 botoesComprar.forEach(function(botaoComprar){
 
     botaoComprar.addEventListener('click', function(event) {
-
        
         event.preventDefault();     
 
@@ -452,12 +501,27 @@ botoesComprar.forEach(function(botaoComprar){
             alert('Você precisa estar logado para adicionar produtos ao carrinho');
             window.location.href = 'login.html';
             return;
-        }
-
-        
+        }       
      
 
-        const produto = botaoComprar.closest('.produto');        
+        const produto = botaoComprar.closest('.produto');  
+        const idProduto = produto.dataset.id;
+
+        const quantidadeEstoque = estoqueProdutos[idProduto];
+
+        console.log('Produto:', nomeProdutoTemporario = produto.querySelector('h2').textContent);
+        console.log('ID do produto:', idProduto);
+        console.log('Estoque disponível:', quantidadeEstoque);
+
+        console.log('Objeto estoque:', estoqueProdutos);
+        console.log('Estoque da camisa:', estoqueProdutos['1']);
+
+
+        if (quantidadeEstoque <= 0) {
+            alert('Produto fora de estoque!');
+            return;
+        }
+
       
         const nome = produto.querySelector('h2').textContent;
        
@@ -480,6 +544,7 @@ botoesComprar.forEach(function(botaoComprar){
 
         } else {
             carrinho.push({
+                id: idProduto,
                 nome: nome,
                 preco: valor,
                 quantidade: 1,
@@ -487,9 +552,12 @@ botoesComprar.forEach(function(botaoComprar){
             });
         };
 
+      estoqueProdutos[idProduto]--;
+      salvarEstoque();
+      atualizarEstoqueTela();  
       salvarCarrinho();
-
       atualizarCarrinho();
+
 
       console.log('produto adicionado:', nome);
       console.log('Carrinho:', carrinho);
@@ -511,46 +579,60 @@ const botaoComprarModal = document.querySelector('.btn-comprar-modal');
 let produtoSelecionadoModal = null;
 
 botaoComprarModal.addEventListener('click', function() {
+
     if (!produtoSelecionadoModal) {
-        return;        
+        return;
     }
 
     if (!verificarLogin()) {
-        alert('Você precisa esta logado para adiciona produtos ao carrinho');
+        alert('Você precisa estar logado para adicionar produtos ao carrinho.');
         window.location.href = 'login.html';
+        return;
+    }
 
-    }      
+    const idProduto = produtoSelecionadoModal.dataset.id;
 
-const nome = produtoSelecionadoModal.querySelector('h2').textContent;
-const preco = produtoSelecionadoModal.querySelector('.preco').textContent;
-const imagem = produtoSelecionadoModal.querySelector('img').src;
-const valor = Number(preco.replace('R$', '').replace(',', '.'));
-const produtoExistente = carrinho.find(function(item) {
-    return item.nome === nome;    
-});
+    const quantidadeEstoque = estoqueProdutos[idProduto];
 
-if (produtoExistente) {
-    produtoExistente.quantidade++;
-} else {
-    carrinho.push({
-        nome: nome,
-        preco: valor,
-        quantidade: 1,
-        imagem: imagem
+    if (quantidadeEstoque === undefined || quantidadeEstoque <= 0) {
+        alert('Produto fora de estoque!');
+        return;
+    }
+
+    const nome = produtoSelecionadoModal.querySelector('h2').textContent;
+    const preco = produtoSelecionadoModal.querySelector('.preco').textContent;
+    const imagem = produtoSelecionadoModal.querySelector('img').src;
+
+    const valor = Number(preco.replace('R$', '').replace(',', '.'));
+
+    const produtoExistente = carrinho.find(function(item) {
+        return item.id === idProduto;
     });
-}
-salvarCarrinho();
-atualizarCarrinho();
-modal.style.display = 'none';
 
-alert('Produto adicionado ao carrinho');
+    if (produtoExistente) {
+        produtoExistente.quantidade++;
+    } else {
+        carrinho.push({
+            id: idProduto,
+            nome: nome,
+            preco: valor,
+            quantidade: 1,
+            imagem: imagem
+        });
+    }
+
+    estoqueProdutos[idProduto]--;
+
+    salvarEstoque();
+    atualizarEstoqueTela();
+    salvarCarrinho();
+    atualizarCarrinho();
+
+    modal.style.display = 'none';
+
+    alert('Produto adicionado ao carrinho');
 
 });
-
-
-
-
-
 
 botoesDetalhes.forEach(function(botao) {
 
@@ -636,13 +718,27 @@ function atualizarCarrinho() {
 
         botaoMais.addEventListener('click', function() {
 
+            const idProduto = produto.id;
+            const quantidadeEstoque = estoqueProdutos[idProduto];
+
+            if (quantidadeEstoque === undefined || quantidadeEstoque <= 0) {
+                alert('Produto fora de estoue!');
+                return;
+            }
             produto.quantidade++;
 
+            estoqueProdutos[idProduto]--;
+
+            salvarEstoque();
+            atualizarEstoqueTela();
             salvarCarrinho();
             atualizarCarrinho();
         });
 
         botaoMenos.addEventListener('click', function() {
+
+            const idProduto = produto.id;
+
             if (produto.quantidade > 1) {
                 produto.quantidade--;
             }else {
@@ -650,6 +746,14 @@ function atualizarCarrinho() {
 
                 carrinho.splice(indice, 1);
             }
+            
+            if (idProduto !== undefined && estoqueProdutos[idProduto] !== undefined
+                
+            ) {
+                estoqueProdutos[idProduto]++;
+                salvarEstoque();
+            }
+            atualizarEstoqueTela();
             salvarCarrinho();
             atualizarCarrinho();
         });
@@ -663,16 +767,24 @@ function atualizarCarrinho() {
         itemCarrinho.appendChild(botaoRemover);
 
         botaoRemover.addEventListener('click', function(){
-            const indice = carrinho.indexOf(produto);            
+            const indice = carrinho.indexOf(produto); 
+            const idProduto = produto.id;
+
+            if (idProduto !== undefined && estoqueProdutos[idProduto] !== undefined) {
+                estoqueProdutos[idProduto] += produto.quantidade;
+                salvarEstoque();
+
+                console.log('Estoque após remover', estoqueProdutos);
+            }
 
             carrinho.splice(indice, 1);
-
-            atualizarCarrinho();
-
+            atualizarEstoqueTela();
             salvarCarrinho();
+            atualizarCarrinho();           
             
-            totalCarrinho.textContent = ' R$ ' + total.toFixed(2).replace('.', ',');
+            // totalCarrinho.textContent = ' R$ ' + total.toFixed(2).replace('.', ',');
         });
+
     
         listaCarrinho.appendChild(itemCarrinho);
         });
@@ -725,6 +837,10 @@ function atualizarContadorCarrinho() {
 };
 
 carregarCarrinho();
+
+window.addEventListener('pageshow', function(){
+    carregarCarrinho();
+});
 
 
 const usuarioArea = document.getElementById('usuario-area');
@@ -904,11 +1020,6 @@ compraSegura.addEventListener('click', function() {
     const infoSeguranca = compraSegura.querySelector('.info-seguranca');
     infoSeguranca.classList.toggle('ativo');
 });
-
-
-
-
-
 
 
 

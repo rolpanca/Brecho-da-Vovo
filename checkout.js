@@ -230,7 +230,17 @@ if (carrinho.length === 0) {
             return;
         }
 
+const estoqueAtual = JSON.parse(
+    localStorage.getItem('estoqueProdutos')
+) || {};
 
+for (const produto of carrinho) {
+    if (estoqueAtual[produto.id] === undefined || 
+        estoqueAtual[produto.id] < 0) {
+            alert('Não foi possível confirmar o estoque do produto: ' + produto.nome);
+            return;
+    }     
+}
 
 let totalPedido = 0;
 

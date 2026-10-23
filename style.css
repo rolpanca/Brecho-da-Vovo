@@ -142,7 +142,7 @@ nav {
 ===================================================================*/   
 .produtos {    
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 280px));   
+    grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),280px));   
     justify-content: center;  
     gap: 25px;
     padding: 30px;     
@@ -155,19 +155,23 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
+    gap: 10px;
+
     width: auto;
-
-
-    border: 1px solid #ddd;
     padding: 20px;
+
+    border: 1px solid #ddd;    
     border-radius: 10px;
+
     text-align: center;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
     transition: 0.3s;
+    overflow: hidden;
 
     gap: 10px;
 
-    overflow: hidden;
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -176,6 +180,10 @@ nav {
     width: 100%;
     height: 220px;
     object-fit: contain;
+
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
 }
 .produto:hover {
     transform: translateY(-8px) scale(1.03);
@@ -195,6 +203,7 @@ nav {
 
 .badge {
     position: absolute;
+   
     top: 15px;
     left: 15px;
     background: #d62828;
@@ -270,15 +279,19 @@ nav {
     color: white;
     border: none;
     box-sizing: border-box;
+
     padding: 12px;
     width: 100%;
     margin-top: 10px;
+
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 8px;    
     font-size: 16px;
     font-weight: bold;
-    transition: all .3s;
+
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .btn-comprar:hover {
     background: #087307;
     transform: translateY(-3px);
@@ -456,7 +469,7 @@ nav {
 .modal-conteudo {
     background: white;
     width: 90%;
-    max-width: 500px;
+    max-width: 500px;      
     padding: 35px;
     border-radius: 20px;
     text-align: center;
@@ -1477,9 +1490,40 @@ CHECKOUT
 } 
 
 #conteudo-detalhes {
+    color: #000;
     text-align: left;
     line-height: 1.6;
     white-space: pre-line;
+}
+
+#conteudo-detalhes .produto-pedido {
+    display: block;
+    max-width: 100%;     
+    box-sizing: border-box;   
+    width: 100px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    overflow-wrap: anywhere;
+}
+#conteudo-detalhes .produto-pedido img {
+    display: block;
+    width: 100px;
+    max-width: 100%;
+    height: 100px;
+    max-width: 100px;
+    object-fit: contain;
+    margin: 0 0 10px 0;
+}
+#conteudo-detalhes .produto-pedido p {
+   width: 100%;
+   max-width: 100%;
+   box-sizing: border-box;    
+   margin: 0;
+   text-align: left;
+   overflow-wrap: anywhere; 
+   white-space: normal;
 }
 
 /*========================================
