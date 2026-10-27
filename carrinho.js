@@ -94,6 +94,8 @@ function carregarCarrinho () {
             `;
 
             totalCarrinho.textContent = 'R$ 0,00';
+            const freteCarrinho = document.getElementById('frete-carrinho');
+            freteCarrinho.textContent = '-';
 
             const subtotal = document.getElementById('subtotal-carrinho');
 
@@ -238,7 +240,22 @@ function carregarCarrinho () {
         const quantidadeItens = document.getElementById('quantidade-itens');
         quantidadeItens.textContent = quantidadeTotal;
 
-        totalCarrinho.textContent = ' R$ ' + total.toFixed(2).replace('.', ',');
+        const freteCarrinho = document.getElementById('frete-carrinho');
+        let valorFrete = 0;
+
+        if (total > 0 && total < 150) {
+            valorFrete = 10;
+            freteCarrinho.textContent = 'R$ 10,00';
+        } else if (total >= 150) {
+            valorFrete = 0;
+            freteCarrinho.textContent = 'Grátis';
+        } else {
+            freteCarrinho.textContent = '-';
+        }
+        const valorTotal = total + valorFrete;
+
+        totalCarrinho.textContent = 'R$' + valorTotal.toFixed(2).replace('.', ',');
+       
 
     };
     carregarCarrinho();

@@ -123,7 +123,14 @@ function atualizarCheckout(){
         listaCheckout.appendChild(item);
     });
 
-    totalCheckout.textContent = 'Total: R$ ' + total.toFixed(2).replace('.', ',');
+    let valorFrete = 0;
+
+    if (total > 0 && total < 150) {
+        valorFrete = 10;
+    }
+    const valorTotal = total + valorFrete;
+
+    totalCheckout.textContent = 'Total: R$ ' + valorTotal.toFixed(2).replace('.', ',');
 };
 
 function obterChaveCarrrinho() {
@@ -249,7 +256,12 @@ carrinho.forEach(function(produto) {
 });
 
 
-let formaPagamento = '';
+let fretePedido = 0;
+
+if (totalPedido > 0 && totalPedido < 150) {
+    fretePedido = 10;
+}
+totalPedido += fretePedido;
 
 pagamento.forEach(function(opcao){
     if (opcao.checked) {

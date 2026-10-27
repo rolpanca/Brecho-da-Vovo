@@ -1495,36 +1495,43 @@ CHECKOUT
     line-height: 1.6;
     white-space: pre-line;
 }
+#conteudo-detalhes p {
+    margin: 2px 0;
+    line-height: 1.2;
+}
 
 #conteudo-detalhes .produto-pedido {
-    display: block;
-    max-width: 100%;     
-    box-sizing: border-box;   
-    width: 100px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   
+    width: 100%;
+    max-width: 100%;   
+    box-sizing: border-box;  
+    margin: -20px;
+    padding: 0;
+    border-bottom: 1px solid #ddd;        
     overflow-wrap: anywhere;
 }
 #conteudo-detalhes .produto-pedido img {
     display: block;
     width: 100px;
-    max-width: 100%;
+    max-width: 100px;
     height: 100px;
     max-width: 100px;
     object-fit: contain;
-    margin: 0 0 10px 0;
+    margin: 0;
 }
 #conteudo-detalhes .produto-pedido p {
-   width: 100%;
-   max-width: 100%;
-   box-sizing: border-box;    
-   margin: 0;
-   text-align: left;
-   overflow-wrap: anywhere; 
-   white-space: normal;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 15px 0 0;
+    text-align: left;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    line-height: 1.2;
 }
+
 
 /*========================================
 SEÇÃO CONTATO

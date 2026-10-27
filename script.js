@@ -1076,12 +1076,18 @@ pagamentoBoleto.addEventListener('click', function() {
 
 
 
+
 const entregaBrasil = document.getElementById('entrega-brasil');
 const infoEntregaBrasil = document.getElementById('info-entrega-brasil');
-entregaBrasil.addEventListener('click', function() {    
-     infoEntregaBrasil.textContent = 'Enviamos nossos produtos para todo o entregaBrasil.';
-     infoEntregaBrasil.style.display = infoEntregaBrasil.style.display === 'none' ? 'block' : 'none';
+
+entregaBrasil.addEventListener('click', function() {
+    infoEntregaBrasil.textContent =
+        'Enviamos nossos produtos para todo o Brasil. Consulte as condições de entrega para sua região.';
+
+    infoEntregaBrasil.style.display =
+        infoEntregaBrasil.style.display === 'none' ? 'block' : 'none';
 });
+
 
 
 const entregaGratis = document.getElementById('entrega-gratis');
